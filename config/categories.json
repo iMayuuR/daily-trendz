@@ -1,0 +1,68 @@
+{
+    "mobiles": {
+        "name": "Mobiles",
+        "flipkartId": "tyy",
+        "amazonNode": "1805560031",
+        "weight": 3,
+        "hashtags": [
+            "#Mobiles",
+            "#Smartphones",
+            "#Deals"
+        ]
+    },
+    "electronics": {
+        "name": "Electronics",
+        "flipkartId": "4rr",
+        "amazonNode": "976419031",
+        "weight": 2,
+        "hashtags": [
+            "#Electronics",
+            "#Gadgets",
+            "#TechDeals"
+        ]
+    },
+    "laptops": {
+        "name": "Laptops",
+        "flipkartId": "6bo",
+        "amazonNode": "1375424031",
+        "weight": 2,
+        "hashtags": [
+            "#Laptops",
+            "#Computers",
+            "#TechDeals"
+        ]
+    },
+    "fashion": {
+        "name": "Fashion",
+        "flipkartId": "clo",
+        "amazonNode": "1571271031",
+        "weight": 2,
+        "hashtags": [
+            "#Fashion",
+            "#Style",
+            "#Offers"
+        ]
+    },
+    "home": {
+        "name": "Home & Kitchen",
+        "flipkartId": "j9e",
+        "amazonNode": "976442031",
+        "weight": 1,
+        "hashtags": [
+            "#Home",
+            "#Kitchen",
+            "#Deals"
+        ]
+    },
+    "appliances": {
+        "name": "Appliances",
+        "flipkartId": "osp",
+        "amazonNode": "1380263031",
+        "weight": 1,
+        "hashtags": [
+            "#Appliances",
+            "#HomeAppliances",
+            "#Offers"
+        ]
+    }
+}

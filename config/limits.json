@@ -1,0 +1,30 @@
+{
+    "dailyLimits": {
+        "flipkart": 8,
+        "amazon": 7,
+        "total": 15,
+        "perCategory": 4,
+        "saleMode": 30
+    },
+    "filters": {
+        "minDiscountPercent": 10,
+        "minPriceDrop": 500,
+        "requireInStock": true
+    },
+    "timeSlots": {
+        "morning": "08:00",
+        "afternoon": "12:00",
+        "evening": "17:00",
+        "night": "21:00"
+    },
+    "posting": {
+        "postsPerSlot": 4,
+        "delayBetweenPostsMs": 2000,
+        "retryOnFailure": true,
+        "maxRetries": 1
+    },
+    "deduplication": {
+        "ttlDays": 7,
+        "maxTrackedProducts": 1000
+    }
+}

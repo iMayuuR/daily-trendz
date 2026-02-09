@@ -1,0 +1,24 @@
+{
+    "app": {
+        "name": "Daily Trendz",
+        "version": "1.0.0"
+    },
+    "sources": {
+        "flipkart": {
+            "enabled": true,
+            "priority": 1,
+            "apiBaseUrl": "https://affiliate-api.flipkart.net/affiliate"
+        },
+        "amazon": {
+            "enabled": true,
+            "priority": 2,
+            "marketplace": "www.amazon.in",
+            "region": "eu-west-1"
+        }
+    },
+    "telegram": {
+        "parseMode": "HTML",
+        "disableWebPagePreview": false,
+        "disableNotification": false
+    }
+}

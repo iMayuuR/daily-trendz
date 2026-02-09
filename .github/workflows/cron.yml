@@ -1,0 +1,80 @@
+name: Daily Trendz Scheduler
+
+on:
+  # Scheduled triggers (4 times per day)
+  schedule:
+    # Morning slot - 08:00 IST (02:30 UTC)
+    - cron: '30 2 * * *'
+    # Afternoon slot - 12:00 IST (06:30 UTC)
+    - cron: '30 6 * * *'
+    # Evening slot - 17:00 IST (11:30 UTC)
+    - cron: '30 11 * * *'
+    # Night slot - 21:00 IST (15:30 UTC)
+    - cron: '30 15 * * *'
+  
+  # Manual trigger for testing
+  workflow_dispatch:
+    inputs:
+      sale_mode:
+        description: 'Enable sale mode (higher limits)'
+        required: false
+        default: 'false'
+        type: choice
+        options:
+          - 'true'
+          - 'false'
+
+env:
+  VERCEL_URL: ${{ secrets.VERCEL_URL }}
+  CRON_SECRET: ${{ secrets.CRON_SECRET }}
+
+jobs:
+  trigger-posting:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    
+    steps:
+      - name: Trigger Daily Trendz API
+        id: trigger
+        run: |
+          echo "Starting affiliate posting run..."
+          echo "Time: $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
+          
+          # Build URL
+          API_URL="${VERCEL_URL}/api/run"
+          
+          # Handle sale mode from manual trigger
+          if [ "${{ github.event.inputs.sale_mode }}" == "true" ]; then
+            API_URL="${API_URL}?sale_mode=true"
+          fi
+          
+          # Make the request
+          RESPONSE=$(curl -s -w "\n%{http_code}" \
+            -X GET "$API_URL" \
+            -H "x-cron-secret: ${CRON_SECRET}" \
+            -H "Content-Type: application/json" \
+            --max-time 120)
+          
+          # Extract response body and status code
+          HTTP_CODE=$(echo "$RESPONSE" | tail -n1)
+          BODY=$(echo "$RESPONSE" | sed '$d')
+          
+          echo "HTTP Status: $HTTP_CODE"
+          echo "Response: $BODY"
+          
+          # Check for success
+          if [ "$HTTP_CODE" -ge 200 ] && [ "$HTTP_CODE" -lt 300 ]; then
+            echo "✅ Posting run completed successfully"
+            echo "response=$BODY" >> $GITHUB_OUTPUT
+          else
+            echo "❌ Posting run failed with status $HTTP_CODE"
+            exit 1
+          fi
+
+      - name: Log Results
+        if: always()
+        run: |
+          echo "=== Daily Trendz Run Complete ==="
+          echo "Timestamp: $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
+          echo "Trigger: ${{ github.event_name }}"
+          echo "Status: ${{ job.status }}"

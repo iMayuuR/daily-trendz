@@ -1,0 +1,22 @@
+{
+  "name": "daily-trendz",
+  "version": "1.0.0",
+  "description": "Automated affiliate posting system for Telegram",
+  "main": "api/run.js",
+  "scripts": {
+    "dev": "vercel dev",
+    "test:dry": "node scripts/dry-run.js",
+    "deploy": "vercel --prod"
+  },
+  "dependencies": {
+    "amazon-paapi": "^1.0.7",
+    "node-fetch": "^2.7.0"
+  },
+  "devDependencies": {
+    "dotenv": "^16.4.5"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "private": true
+}
